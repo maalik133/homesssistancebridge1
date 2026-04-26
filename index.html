@@ -37,18 +37,8 @@ body{background:#20b86b;min-height:100vh}
 }
 
 /* TEXT */
-h1{
-  font-size:24px;
-  font-weight:900;
-  margin-bottom:14px;
-}
-
-.sub{
-  color:#374151;
-  font-size:16px;
-  margin-bottom:18px;
-  line-height:1.4;
-}
+h1{font-size:24px;font-weight:900;margin-bottom:14px}
+.sub{color:#374151;font-size:16px;margin-bottom:18px;line-height:1.4}
 
 img{
   width:100%;
@@ -74,10 +64,6 @@ img{
 .answer{
   background:#f3f4f6;
   color:#111;
-}
-
-.answer:hover{
-  background:#e5e7eb;
 }
 
 /* SCREENS */
@@ -161,7 +147,7 @@ img{
 <p class="sub">Please wait a moment</p>
 </div>
 
-<!-- RESULT (IMPROVED) -->
+<!-- RESULT -->
 <div class="screen" id="result">
 
 <h1>Congratulations!</h1>
@@ -207,13 +193,17 @@ function startQuiz(){
 function next(n){
   show("q"+n);
   if(n==2) bar.style.width="66%";
-  if(n==3) bar.style.width="100%";
+  if(n==3) bar.style.width="66%"; // stays at 66% on Q3
 }
 
 function checking(){
   show("check");
   bar.style.width="100%";
-  setTimeout(()=>{show("result")},1400);
+
+  setTimeout(()=>{
+    progressBox.style.display = "none"; // 🔥 HIDES BAR ON FINAL PAGE
+    show("result");
+  },1400);
 }
 </script>
 
