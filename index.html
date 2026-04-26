@@ -1,300 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Housing Assistance Check</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#20b86b;min-height:100vh}
+.page{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.wrap{width:100%;max-width:420px;text-align:center}
+.brand{color:#fff;font-weight:700;margin-bottom:16px}
+.card{background:#fff;border-radius:10px;padding:24px 18px;box-shadow:0 20px 40px rgba(0,0,0,.15)}
 
-body {
-  background: #20b86b;
-  min-height: 100vh;
-  color: #111827;
-}
+.progress{height:8px;background:#e5e7eb;border-radius:99px;margin-bottom:20px;overflow:hidden}
+.bar{height:100%;width:0;background:#16a34a;transition:.3s}
 
-.page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 16px;
-}
+h1{font-size:24px;font-weight:900;margin-bottom:14px}
+.sub{color:#374151;font-size:16px;margin-bottom:18px}
 
-.quiz-wrap {
-  width: 100%;
-  max-width: 430px;
-  text-align: center;
-}
+img{width:100%;border-radius:8px;margin-bottom:18px}
 
-.brand {
-  color: white;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 18px;
-}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:6px;background:#1877f2;color:#fff;font-weight:800;margin-top:10px;cursor:pointer}
+.answer{background:#f3f4f6;color:#111}
 
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 26px 18px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-}
+.screen{display:none}
+.show{display:block}
 
-.progress-outer {
-  width: 100%;
-  height: 9px;
-  background: #e5e7eb;
-  border-radius: 99px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-
-.progress-inner {
-  width: 0%;
-  height: 100%;
-  background: #16a34a;
-  border-radius: 99px;
-  transition: width 0.35s ease;
-}
-
-h1 {
-  font-size: 25px;
-  line-height: 1.15;
-  font-weight: 900;
-  margin-bottom: 18px;
-}
-
-.hero-img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 22px;
-  height: 210px;
-  object-fit: cover;
-  background: linear-gradient(135deg, #d1fae5, #86efac);
-}
-
-.sub {
-  font-size: 17px;
-  line-height: 1.35;
-  margin-bottom: 24px;
-  color: #374151;
-}
-
-.btn {
-  width: 100%;
-  border: none;
-  background: #0877f2;
-  color: white;
-  padding: 15px 18px;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-}
-
-.answer {
-  background: #f3f4f6;
-  color: #111827;
-  margin-top: 12px;
-  box-shadow: none;
-}
-
-.answer:hover {
-  background: #e5e7eb;
-}
-
-.question-title {
-  font-size: 26px;
-  font-weight: 900;
-  margin-bottom: 24px;
-}
-
-.question-text {
-  font-size: 17px;
-  margin-bottom: 20px;
-}
-
-.checking-title {
-  font-size: 24px;
-  font-weight: 900;
-  margin-bottom: 18px;
-}
-
-.loading-bar {
-  width: 100%;
-  height: 10px;
-  border-radius: 99px;
-  background: #e5e7eb;
-  overflow: hidden;
-}
-
-.loading-fill {
-  height: 100%;
-  width: 0%;
-  background: #0877f2;
-  border-radius: 99px;
-  animation: load 1.7s forwards;
-}
-
-@keyframes load {
-  from { width: 8%; }
-  to { width: 100%; }
-}
-
-.result-title {
-  font-size: 23px;
-  line-height: 1.2;
-  font-weight: 900;
-  margin-bottom: 18px;
-}
-
-.result-sub {
-  font-size: 16px;
-  color: #374151;
-  line-height: 1.4;
-  margin-bottom: 18px;
-}
-
-.steps {
-  text-align: left;
-  font-size: 15px;
-  line-height: 1.55;
-  margin: 0 auto 22px;
-  max-width: 330px;
-}
-
-.footer {
-  color: rgba(255,255,255,0.85);
-  font-size: 12px;
-  line-height: 1.4;
-  margin-top: 18px;
-}
-
-.hidden {
-  display: none;
-}
+.footer{color:#fff;font-size:12px;margin-top:16px;opacity:.9}
 </style>
 </head>
 
 <body>
 
 <div class="page">
-  <div class="quiz-wrap">
-    <div class="brand">Housing Assistance Check</div>
+<div class="wrap">
 
-    <div class="card">
+<div class="brand">Housing Assistance Check</div>
 
-      <div class="progress-outer hidden" id="progressBox">
-        <div class="progress-inner" id="progress"></div>
-      </div>
+<div class="card">
 
-      <!-- START -->
-      <div class="screen" id="start">
-        <h1>You May Be Eligible for Housing Assistance Options</h1>
+<div class="progress"><div class="bar" id="bar"></div></div>
 
-        <div class="hero-img"></div>
+<!-- START -->
+<div class="screen show" id="start">
+<h1>You May Be Eligible for Housing Assistance Options</h1>
 
-        <p class="sub">
-          Answer 3 quick questions to continue your housing assistance eligibility check.
-        </p>
+<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" />
 
-        <button class="btn" onclick="goQuestion(1)">GET STARTED</button>
-      </div>
+<p class="sub">Answer 3 quick questions to continue your eligibility check.</p>
 
-      <!-- QUESTION 1 -->
-      <div class="screen hidden" id="q1">
-        <div class="question-title">Question 1/3</div>
-        <div class="question-text">Are you currently looking for housing-related assistance?</div>
+<button class="btn" onclick="next(1)">GET STARTED</button>
+</div>
 
-        <button class="btn answer" onclick="goQuestion(2)">Yes</button>
-        <button class="btn answer" onclick="goQuestion(2)">No</button>
-      </div>
+<!-- Q1 -->
+<div class="screen" id="q1">
+<h1>Question 1/3</h1>
+<p class="sub">Are you currently looking for housing assistance?</p>
 
-      <!-- QUESTION 2 -->
-      <div class="screen hidden" id="q2">
-        <div class="question-title">Question 2/3</div>
-        <div class="question-text">Do you currently pay rent, utilities, or household expenses?</div>
+<button class="btn answer" onclick="next(2)">Yes</button>
+<button class="btn answer" onclick="next(2)">No</button>
+</div>
 
-        <button class="btn answer" onclick="goQuestion(3)">Yes</button>
-        <button class="btn answer" onclick="goQuestion(3)">No</button>
-      </div>
+<!-- Q2 -->
+<div class="screen" id="q2">
+<h1>Question 2/3</h1>
+<p class="sub">Do you currently pay rent or utilities?</p>
 
-      <!-- QUESTION 3 -->
-      <div class="screen hidden" id="q3">
-        <div class="question-title">Question 3/3</div>
-        <div class="question-text">Are you at least 18 years old?</div>
+<button class="btn answer" onclick="next(3)">Yes</button>
+<button class="btn answer" onclick="next(3)">No</button>
+</div>
 
-        <button class="btn answer" onclick="showChecking()">Yes</button>
-        <button class="btn answer" onclick="showChecking()">No</button>
-      </div>
+<!-- Q3 -->
+<div class="screen" id="q3">
+<h1>Question 3/3</h1>
+<p class="sub">Are you over the age of 18?</p>
 
-      <!-- CHECKING -->
-      <div class="screen hidden" id="checking">
-        <div class="checking-title">Checking Your Options...</div>
-        <div class="loading-bar">
-          <div class="loading-fill"></div>
-        </div>
-      </div>
+<button class="btn answer" onclick="checking()">Yes</button>
+<button class="btn answer" onclick="checking()">No</button>
+</div>
 
-      <!-- RESULT -->
-      <div class="screen hidden" id="result">
-        <div class="result-title">You Can Continue Your Housing Assistance Check</div>
+<!-- CHECKING -->
+<div class="screen" id="check">
+<h1>Checking Your Options...</h1>
+<p class="sub">Please wait a moment</p>
+</div>
 
-        <p class="result-sub">Here’s what to do next:</p>
+<!-- RESULT -->
+<div class="screen" id="result">
+<h1>You’re Ready to Continue</h1>
 
-        <div class="steps">
-          1. Tap the button below<br>
-          2. Complete the form with your correct info<br>
-          3. Continue to see what options may be available
-        </div>
+<p class="sub">Complete the next step to check housing assistance options available in your area.</p>
 
-        <a href="https://giftclick.org/aff_c?offer_id=2300&aff_id=170653" class="btn">CONTINUE SECURELY →</a>
-      </div>
+<a href="YOUR_LINK_HERE" class="btn">CONTINUE SECURELY →</a>
+</div>
 
-    </div>
+</div>
 
-    <div class="footer">
-      Not affiliated with any government agency. Results vary by location, eligibility, and availability.
-    </div>
-  </div>
+<div class="footer">
+Not affiliated with any government agency. Results vary.
+</div>
+
+</div>
 </div>
 
 <script>
-const screens = document.querySelectorAll(".screen");
-const progressBox = document.getElementById("progressBox");
-const progress = document.getElementById("progress");
+let bar=document.getElementById("bar")
 
-function showScreen(id) {
-  screens.forEach(screen => screen.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"))
+document.getElementById(id).classList.add("show")
 }
 
-function goQuestion(num) {
-  progressBox.classList.remove("hidden");
-  showScreen("q" + num);
-
-  if (num === 1) progress.style.width = "33%";
-  if (num === 2) progress.style.width = "66%";
-  if (num === 3) progress.style.width = "100%";
+function next(n){
+show("q"+n)
+if(n==1)bar.style.width="33%"
+if(n==2)bar.style.width="66%"
+if(n==3)bar.style.width="100%"
 }
 
-function showChecking() {
-  showScreen("checking");
-  progress.style.width = "100%";
-
-  setTimeout(() => {
-    showScreen("result");
-  }, 1800);
+function checking(){
+show("check")
+bar.style.width="100%"
+setTimeout(()=>{show("result")},1500)
 }
 </script>
 
