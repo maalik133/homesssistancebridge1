@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Housing Assistance Check</title>
+<title>AssistLinker | Housing Assistance Check</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
@@ -11,7 +11,13 @@ body{background:#20b86b;min-height:100vh}
 .page{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
 .wrap{width:100%;max-width:420px;text-align:center}
 
-.brand{color:#fff;font-weight:700;margin-bottom:16px;font-size:18px}
+.brand{
+  color:#fff;
+  font-weight:800;
+  margin-bottom:16px;
+  font-size:18px;
+  letter-spacing:.3px;
+}
 
 .card{
   background:#fff;
@@ -95,7 +101,7 @@ img{
 <div class="page">
 <div class="wrap">
 
-<div class="brand">Housing Assistance Check</div>
+<div class="brand">AssistLinker</div>
 
 <div class="card">
 
@@ -105,11 +111,13 @@ img{
 
 <!-- START -->
 <div class="screen show" id="start">
-<h1>You May Be Eligible for Housing Assistance Options</h1>
+<h1>Check Housing Assistance Options Near You</h1>
 
 <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa">
 
-<p class="sub">Answer 3 quick questions to continue your eligibility check.</p>
+<p class="sub">
+Answer a few quick questions to continue your assistance check through AssistLinker.
+</p>
 
 <button class="btn" onclick="startQuiz()">GET STARTED</button>
 </div>
@@ -144,7 +152,7 @@ img{
 <!-- CHECKING -->
 <div class="screen" id="check">
 <h1>Checking Your Answers...</h1>
-<p class="sub">Please wait a moment</p>
+<p class="sub">Matching you with available options</p>
 </div>
 
 <!-- RESULT -->
@@ -152,24 +160,26 @@ img{
 
 <h1>Congratulations!</h1>
 
-<p class="sub">You can continue your housing assistance check.</p>
+<p class="sub">
+You can continue your housing assistance check through AssistLinker.
+</p>
 
 <p style="font-weight:700;margin-bottom:6px;">Here’s what to do next:</p>
 
 <div class="steps">
-1. Tap the "Continue Securely" button below<br>
-2. Complete the form with your correct information<br>
-3. Continue to see what options may be available
+1. Tap "Continue Securely"<br>
+2. Enter your information accurately<br>
+3. Continue to view available assistance options
 </div>
 
-<a href="YOUR_LINK_HERE" class="btn">CONTINUE SECURELY →</a>
+<a href="https://trksy.org/aff_c?offer_id=2300&aff_id=170653" class="btn">CONTINUE SECURELY →</a>
 
 </div>
 
 </div>
 
 <div class="footer">
-Not affiliated with any government agency. Results vary by location, eligibility, and availability.
+AssistLinker is not affiliated with any government agency. Results vary by location and eligibility.
 </div>
 
 </div>
@@ -193,7 +203,7 @@ function startQuiz(){
 function next(n){
   show("q"+n);
   if(n==2) bar.style.width="66%";
-  if(n==3) bar.style.width="66%"; // stays at 66% on Q3
+  if(n==3) bar.style.width="66%";
 }
 
 function checking(){
@@ -201,7 +211,7 @@ function checking(){
   bar.style.width="100%";
 
   setTimeout(()=>{
-    progressBox.style.display = "none"; // 🔥 HIDES BAR ON FINAL PAGE
+    progressBox.style.display="none";
     show("result");
   },1400);
 }
