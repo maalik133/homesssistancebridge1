@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Housing Assistance Check</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #20b86b;
+  min-height: 100vh;
+  color: #111827;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+}
+
+.quiz-wrap {
+  width: 100%;
+  max-width: 430px;
+  text-align: center;
+}
+
+.brand {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 26px 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+.progress-outer {
+  width: 100%;
+  height: 9px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progress-inner {
+  width: 0%;
+  height: 100%;
+  background: #16a34a;
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}
+
+h1 {
+  font-size: 25px;
+  line-height: 1.15;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.hero-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 22px;
+  height: 210px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #d1fae5, #86efac);
+}
+
+.sub {
+  font-size: 17px;
+  line-height: 1.35;
+  margin-bottom: 24px;
+  color: #374151;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  background: #0877f2;
+  color: white;
+  padding: 15px 18px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.answer {
+  background: #f3f4f6;
+  color: #111827;
+  margin-top: 12px;
+  box-shadow: none;
+}
+
+.answer:hover {
+  background: #e5e7eb;
+}
+
+.question-title {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 24px;
+}
+
+.question-text {
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.checking-title {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 99px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.loading-fill {
+  height: 100%;
+  width: 0%;
+  background: #0877f2;
+  border-radius: 99px;
+  animation: load 1.7s forwards;
+}
+
+@keyframes load {
+  from { width: 8%; }
+  to { width: 100%; }
+}
+
+.result-title {
+  font-size: 23px;
+  line-height: 1.2;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.result-sub {
+  font-size: 16px;
+  color: #374151;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+
+.steps {
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 auto 22px;
+  max-width: 330px;
+}
+
+.footer {
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 18px;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+  <div class="quiz-wrap">
+    <div class="brand">Housing Assistance Check</div>
+
+    <div class="card">
+
+      <div class="progress-outer hidden" id="progressBox">
+        <div class="progress-inner" id="progress"></div>
+      </div>
+
+      <!-- START -->
+      <div class="screen" id="start">
+        <h1>You May Be Eligible for Housing Assistance Options</h1>
+
+        <div class="hero-img"></div>
+
+        <p class="sub">
+          Answer 3 quick questions to continue your housing assistance eligibility check.
+        </p>
+
+        <button class="btn" onclick="goQuestion(1)">GET STARTED</button>
+      </div>
+
+      <!-- QUESTION 1 -->
+      <div class="screen hidden" id="q1">
+        <div class="question-title">Question 1/3</div>
+        <div class="question-text">Are you currently looking for housing-related assistance?</div>
+
+        <button class="btn answer" onclick="goQuestion(2)">Yes</button>
+        <button class="btn answer" onclick="goQuestion(2)">No</button>
+      </div>
+
+      <!-- QUESTION 2 -->
+      <div class="screen hidden" id="q2">
+        <div class="question-title">Question 2/3</div>
+        <div class="question-text">Do you currently pay rent, utilities, or household expenses?</div>
+
+        <button class="btn answer" onclick="goQuestion(3)">Yes</button>
+        <button class="btn answer" onclick="goQuestion(3)">No</button>
+      </div>
+
+      <!-- QUESTION 3 -->
+      <div class="screen hidden" id="q3">
+        <div class="question-title">Question 3/3</div>
+        <div class="question-text">Are you at least 18 years old?</div>
+
+        <button class="btn answer" onclick="showChecking()">Yes</button>
+        <button class="btn answer" onclick="showChecking()">No</button>
+      </div>
+
+      <!-- CHECKING -->
+      <div class="screen hidden" id="checking">
+        <div class="checking-title">Checking Your Options...</div>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div class="screen hidden" id="result">
+        <div class="result-title">You Can Continue Your Housing Assistance Check</div>
+
+        <p class="result-sub">Here’s what to do next:</p>
+
+        <div class="steps">
+          1. Tap the button below<br>
+          2. Complete the form with your correct info<br>
+          3. Continue to see what options may be available
+        </div>
+
+        <a href="https://giftclick.org/aff_c?offer_id=2300&aff_id=170653" class="btn">CONTINUE SECURELY →</a>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      Not affiliated with any government agency. Results vary by location, eligibility, and availability.
+    </div>
+  </div>
+</div>
+
+<script>
+const screens = document.querySelectorAll(".screen");
+const progressBox = document.getElementById("progressBox");
+const progress = document.getElementById("progress");
+
+function showScreen(id) {
+  screens.forEach(screen => screen.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function goQuestion(num) {
+  progressBox.classList.remove("hidden");
+  showScreen("q" + num);
+
+  if (num === 1) progress.style.width = "33%";
+  if (num === 2) progress.style.width = "66%";
+  if (num === 3) progress.style.width = "100%";
+}
+
+function showChecking() {
+  showScreen("checking");
+  progress.style.width = "100%";
+
+  setTimeout(() => {
+    showScreen("result");
+  }, 1800);
+}
+</script>
+
+</body>
+</html>
