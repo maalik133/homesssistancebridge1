@@ -12,22 +12,16 @@ body{background:#20b86b;min-height:100vh}
 .wrap{width:100%;max-width:420px;text-align:center}
 .brand{color:#fff;font-weight:700;margin-bottom:16px}
 .card{background:#fff;border-radius:10px;padding:24px 18px;box-shadow:0 20px 40px rgba(0,0,0,.15)}
-
 .progress{height:8px;background:#e5e7eb;border-radius:99px;margin-bottom:20px;overflow:hidden}
 .bar{height:100%;width:0;background:#16a34a;transition:.3s}
-
 h1{font-size:24px;font-weight:900;margin-bottom:14px}
-.sub{color:#374151;font-size:16px;margin-bottom:18px}
-
+.sub{color:#374151;font-size:16px;margin-bottom:18px;line-height:1.4}
 img{width:100%;border-radius:8px;margin-bottom:18px}
-
-.btn{display:block;width:100%;padding:14px;border:none;border-radius:6px;background:#1877f2;color:#fff;font-weight:800;margin-top:10px;cursor:pointer}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:6px;background:#1877f2;color:#fff;font-weight:800;margin-top:10px;cursor:pointer;text-decoration:none}
 .answer{background:#f3f4f6;color:#111}
-
 .screen{display:none}
 .show{display:block}
-
-.footer{color:#fff;font-size:12px;margin-top:16px;opacity:.9}
+.footer{color:#fff;font-size:12px;margin-top:16px;opacity:.9;line-height:1.4}
 </style>
 </head>
 
@@ -42,87 +36,73 @@ img{width:100%;border-radius:8px;margin-bottom:18px}
 
 <div class="progress"><div class="bar" id="bar"></div></div>
 
-<!-- START -->
 <div class="screen show" id="start">
 <h1>You May Be Eligible for Housing Assistance Options</h1>
-
-<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" />
-
+<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa">
 <p class="sub">Answer 3 quick questions to continue your eligibility check.</p>
-
 <button class="btn" onclick="next(1)">GET STARTED</button>
 </div>
 
-<!-- Q1 -->
 <div class="screen" id="q1">
 <h1>Question 1/3</h1>
 <p class="sub">Are you currently looking for housing assistance?</p>
-
 <button class="btn answer" onclick="next(2)">Yes</button>
 <button class="btn answer" onclick="next(2)">No</button>
 </div>
 
-<!-- Q2 -->
 <div class="screen" id="q2">
 <h1>Question 2/3</h1>
 <p class="sub">Do you currently pay rent or utilities?</p>
-
 <button class="btn answer" onclick="next(3)">Yes</button>
 <button class="btn answer" onclick="next(3)">No</button>
 </div>
 
-<!-- Q3 -->
 <div class="screen" id="q3">
 <h1>Question 3/3</h1>
 <p class="sub">Are you over the age of 18?</p>
-
 <button class="btn answer" onclick="checking()">Yes</button>
 <button class="btn answer" onclick="checking()">No</button>
 </div>
 
-<!-- CHECKING -->
 <div class="screen" id="check">
-<h1>Checking Your Options...</h1>
+<h1>Checking Your Answers...</h1>
 <p class="sub">Please wait a moment</p>
 </div>
 
-<!-- RESULT -->
 <div class="screen" id="result">
-<h1>You’re Ready to Continue</h1>
-
-<p class="sub">Complete the next step to check housing assistance options available in your area.</p>
-
+<h1>Congratulations!</h1>
+<p class="sub">Based on your answers, you can continue to check your housing assistance options.</p>
 <a href="YOUR_LINK_HERE" class="btn">CONTINUE SECURELY →</a>
 </div>
 
 </div>
 
 <div class="footer">
-Not affiliated with any government agency. Results vary.
+Not affiliated with any government agency. Results vary by location, eligibility, and availability.
 </div>
 
 </div>
 </div>
 
 <script>
-let bar=document.getElementById("bar")
+let bar=document.getElementById("bar");
 
 function show(id){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"))
-document.getElementById(id).classList.add("show")
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
+  document.getElementById(id).classList.add("show");
 }
 
 function next(n){
-show("q"+n)
-if(n==1)bar.style.width="33%"
-if(n==2)bar.style.width="66%"
-if(n==3)bar.style.width="100%"
+  show("q"+n);
+  if(n==1)bar.style.width="33%";
+  if(n==2)bar.style.width="66%";
+  if(n==3)bar.style.width="100%";
 }
 
 function checking(){
-show("check")
-bar.style.width="100%"
-setTimeout(()=>{show("result")},1500)
+  show("check");
+  bar.style.width="100%";
+  setTimeout(()=>{show("result")},1500);
 }
 </script>
 
